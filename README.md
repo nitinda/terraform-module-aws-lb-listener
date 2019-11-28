@@ -30,6 +30,32 @@ From branch : **_listener-http_**
 
 ## Usage
 
+## Using this repo
+
+To use this module, add the following call to your code:
+
+```tf
+module "<layer>-lb-listener-<AccountID>" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=listener-http"
+
+  # Providers
+  providers = {
+    "aws" = "aws.services"
+  }
+
+  # ALB Listener
+  load_balancer_arn = "${var.load_balancer_arn}"
+  listener_port     = 80
+  listener_protocol = "HTTP"
+  target_group_arn  = "${var.target_group_arn}"
+}
+
+```
+
+---
+
+## Inputs
+
 The variables that required in order for the module to be successfully called from the layers are the following:
 
 
