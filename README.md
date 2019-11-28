@@ -25,15 +25,6 @@ From branch : **_listener-http_**
 - **_Load Balancer Listener (HTTP - Terraform 11 supported code)_**
 
 
-From branch : **_listener-https_**
-
-- **_Load Balancer Listener (HTTPS - Terraform 11 supported code)_**
-
-
-From branch : **_listener-tcp_**
-
-- **_Load Balancer Listener (TCP - Terraform 11 supported code)_**
-
 
 ---
 
@@ -42,7 +33,14 @@ From branch : **_listener-tcp_**
 The variables that required in order for the module to be successfully called from the layers are the following:
 
 
-* **_Details are in respective branch._**
+|         **_Variable_**          |        **_Description_**            |   **_Type_**   |
+|---------------------------------|-------------------------------------|----------------|
+| load_balancer_arn               | Load Balancer arn                   | string         |
+| listener_port                   | Listener port                       | string         |
+| listener_protocol               | Listener protocol                   | string         |
+| target_group_arn                | Target Group arn                    | string         |
+
+
 
 
 ## Outputs
@@ -51,7 +49,9 @@ The variables that required in order for the module to be successfully called fr
 Below are the variables that Networking Module exposes in order to be used by other layers
 
 
-* **_Details are in respective branch._**
+- **_id_**
+- **_arn_**
+
 
 
 ### Usage
