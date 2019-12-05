@@ -9,7 +9,7 @@ This module may be used to create **_Load Balancer Listener_** resources in AWS 
 
 ## Prerequisites
 
-This module needs Terraform **_0.11.14_** or newer.
+This module needs Terraform **_0.12.16_** or newer.
 You can download the latest Terraform version from [here](https://www.terraform.io/downloads.html).
 
 This module deploys aws services details are in respective feature branches.
@@ -22,19 +22,10 @@ This module deploys aws services details are in respective feature branches.
 
 Below we are able to check the resources that are being created as part of this module call:
 
-From branch : **_terraform-11/listener-http_**
+From branch : **_terraform-12/listener-http_**
 
 - **_Load Balancer Listener (HTTP - Terraform 11 supported code)_**
 
-
-From branch : **_terraform-11/listener-https_**
-
-- **_Load Balancer Listener (HTTPS - Terraform 11 supported code)_**
-
-
-From branch : **_terraform-11/listener-tcp_**
-
-- **_Load Balancer Listener (TCP - Terraform 11 supported code)_**
 
 
 
@@ -50,9 +41,18 @@ To use this module, add the following call to your code:
 
 ```tf
 module "<layer>-lb-listener-<AccountID>" {
-  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=terraform-12/listener-http"
+  
+  # Providers
+  providers = {
+    "aws" = "aws.services"
+  }
 
-
+  # ALB Listener
+  load_balancer_arn = var.load_balancer_arn
+  port              = 443
+  protocol          = "HTTP"
+  target_group_arn  = var.target_group_arn
 }
 ```
 
@@ -67,7 +67,13 @@ module "<layer>-lb-listener-<AccountID>" {
 The variables that required in order for the module to be successfully called from the layers are the following:
 
 
-* **_Details are in respective branch._**
+|         **_Variable_**          |        **_Description_**            |   **_Type_**   |
+|---------------------------------|-------------------------------------|----------------|
+| load_balancer_arn               | Load Balancer arn                   | string         |
+| listener_port                   | Listener port                       | string         |
+| listener_protocol               | Listener protocol                   | string         |
+| target_group_arn                | Target Group arn                    | string         |
+
 
 
 ## Outputs
@@ -76,7 +82,9 @@ The variables that required in order for the module to be successfully called fr
 Below are the variables that Networking Module exposes in order to be used by other layers
 
 
-* **_Details are in respective branch._**
+* **_arn_**
+* **_id_**
+
 
 
 ### Usage
