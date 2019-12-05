@@ -20,24 +20,47 @@ This module deploys aws services details are in respective feature branches.
 
 Below we are able to check the resources that are being created as part of this module call:
 
-From branch : **_listener-http_**
+From branch : **_terraform-11/listener-http_**
 
 - **_Load Balancer Listener (HTTP - Terraform 11 supported code)_**
 
 
-From branch : **_listener-https_**
+From branch : **_terraform-11/listener-https_**
 
 - **_Load Balancer Listener (HTTPS - Terraform 11 supported code)_**
 
 
-From branch : **_listener-tcp_**
+From branch : **_terraform-11/listener-tcp_**
 
 - **_Load Balancer Listener (TCP - Terraform 11 supported code)_**
 
 
+
 ---
 
+
+
 ## Usage
+
+## Using this repo
+
+To use this module, add the following call to your code:
+
+```tf
+module "<layer>-lb-listener-<AccountID>" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+
+
+}
+```
+
+
+---
+
+
+
+## Inputs
+
 
 The variables that required in order for the module to be successfully called from the layers are the following:
 
