@@ -1,7 +1,7 @@
 resource "aws_lb_listener" "lb_listener" {
   load_balancer_arn = var.load_balancer_arn
-  port              = var.listener_port
-  protocol          = var.listener_protocol
+  port              = var.port
+  protocol          = var.protocol
 
   default_action {
     type             = "forward"
