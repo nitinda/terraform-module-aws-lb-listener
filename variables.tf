@@ -4,6 +4,7 @@ variable "load_balancer_arn" {
 
 variable "listener_port" {
   description = "The port on which the load balancer is listening."
+  type        = number
 }
 
 variable "listener_protocol" {
