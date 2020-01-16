@@ -67,9 +67,10 @@ _The variables that required in order for the module to be successfully called f
 |**_Variable_** | **_Description_** | **_Type_** | **_Comments_** |
 |:----|:----|-----:|-----:|
 | **_load\_balancer\_arn_** | _Load Balancer arn_ | _string_ | **_Required_** |
-| **_listener\_port_** | _Listener port_ | _number_ | **_Required_** |
-| **_listener\_protocol_** | _Listener protocol_ | _string_ | **_Required_** |
+| **_port_** | _Listener port_ | _number_ | **_Required_** |
+| **_protocol_** | _Listener protocol_ | _string_ | **_Required_** |
 | **_target\_group\_arn_** | _Target Group arn_ | _string_ | **_Required_** |
+
 
 
 ## Outputs
