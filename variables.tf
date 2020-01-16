@@ -2,12 +2,12 @@ variable "load_balancer_arn" {
   description = "The ARN of the load balancer."
 }
 
-variable "listener_port" {
+variable "port" {
   description = "The port on which the load balancer is listening."
   type        = number
 }
 
-variable "listener_protocol" {
+variable "protocol" {
   description = "The protocol for connections from clients to the load balancer."
 }
 
