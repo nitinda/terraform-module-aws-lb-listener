@@ -47,9 +47,11 @@ _Below we are able to check the resources that are being created as part of this
 
 _To use this module, add the following call to your code:_
 
+- **_Forward Action_**
+
 ```tf
 module "lb_listener" {
-  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=terraform-12/listener-http"
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
   
   # Providers
   providers = {
@@ -57,12 +59,27 @@ module "lb_listener" {
   }
 
   # ALB Listener
-  load_balancer_arn = var.load_balancer_arn
+  load_balancer_arn = module.alb.arn
   port              = 80
   protocol          = "HTTP"
-  target_group_arn  = var.target_group_arn
+
+  default_action = {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.front_end.arn}"
+  }
 }
 ```
+
+- **_Redirect Action_**
+
+
+- **_Fixed-response Action_**
+
+
+- **_Authenticate-cognito Action_**
+
+
+- **_Authenticate-oidc Action_**
 
 
 ---
