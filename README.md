@@ -1,40 +1,29 @@
-# Terraform Module Name: terraform-module-aws-lb-listener
+# Terraform Module: terraform-module-aws-lb-listener
 
 
 ## General
 
-This module may be used to create **_Load Balancer Listener_** resources in AWS cloud provider..
+_This module may be used to create_ **_Load Balancer Listener_** _resources in AWS cloud provider....._
 
 ---
 
 ## Prerequisites
 
-This module needs Terraform **_0.11.14_** or newer.
-You can download the latest Terraform version from [here](https://www.terraform.io/downloads.html).
+_This module needs_ **_Terraform 0.12.16_** _or newer._
+_You can download the latest Terraform version from_ [_here_](https://www.terraform.io/downloads.html).
 
-This module deploys aws services details are in respective feature branches.
+_This module deploys aws services details are in respective feature branches._
 
 
 ---
 
 
-## Features Branches
+## Features
 
-Below we are able to check the resources that are being created as part of this module call:
+_Below we are able to check the resources that are being created as part of this module call:_
 
-From branch : **_terraform-11/listener-http_**
+- **_Load Balancer Listener_**
 
-- **_Load Balancer Listener (HTTP - Terraform 11 supported code)_**
-
-
-From branch : **_terraform-11/listener-https_**
-
-- **_Load Balancer Listener (HTTPS - Terraform 11 supported code)_**
-
-
-From branch : **_terraform-11/listener-tcp_**
-
-- **_Load Balancer Listener (TCP - Terraform 11 supported code)_**
 
 
 
@@ -46,13 +35,22 @@ From branch : **_terraform-11/listener-tcp_**
 
 ## Using this repo
 
-To use this module, add the following call to your code:
+_To use this module, add the following call to your code:_
 
 ```tf
-module "<layer>-lb-listener-<AccountID>" {
-  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+module "lb_listener" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=terraform-12/listener-http"
+  
+  # Providers
+  providers = {
+    aws = aws.services
+  }
 
-
+  # ALB Listener
+  load_balancer_arn = var.load_balancer_arn
+  port              = 80
+  protocol          = "HTTP"
+  target_group_arn  = var.target_group_arn
 }
 ```
 
@@ -64,52 +62,40 @@ module "<layer>-lb-listener-<AccountID>" {
 ## Inputs
 
 
-The variables that required in order for the module to be successfully called from the layers are the following:
+_The variables that required in order for the module to be successfully called from the layers are the following:_
 
+|**_Variable_** | **_Description_** | **_Type_** | **_Comments_** |
+|:----|:----|-----:|-----:|
+| **_load\_balancer\_arn_** | _Load Balancer arn_ | _string_ | **_Required_** |
+| **_port_** | _Listener port_ | _number_ | **_Required_** |
+| **_protocol_** | _Listener protocol_ | _string_ | **_Required_** |
+| **_target\_group\_arn_** | _Target Group arn_ | _string_ | **_Required_** |
 
-* **_Details are in respective branch._**
 
 
 ## Outputs
 
 ### General
-Below are the variables that Networking Module exposes in order to be used by other layers
+_Below are the variables that Networking Module exposes in order to be used by other layers_
 
 
-* **_Details are in respective branch._**
+* **_arn_**
+* **_id_**
+
 
 
 ### Usage
-In order for the variables to be accessed on module level please use the syntax below:
+_In order for the variables to be accessed on module level please use the syntax below:_
 
 ```tf
 module.<module_name>.<output_variable_name>
 ```
-
-If an output variable needs to be exposed on root level in order to be accessed through terraform state file follow the steps below:
-
-- Include the syntax above in the network layer output terraform file.
-- Add the code snippet below to the variables/global_variables file.
+_The output variable is able to be accessed through terraform state file using the syntax below:_
 
 ```tf
-data "terraform_remote_state" "<module_name>" {
-  backend = "s3"
-
-  config {
-    bucket = <bucket_name> (i.e. "uki-s3-terraform-state")
-    key    = <state_file_relative_path> (i.e. "env:/${terraform.workspace}/4_Networking/terraform.tfstate")
-    region = <bucket_region> (i.e. "eu-central-1")
-  }
-}
-```
-
-
-- The output variable is able to be accessed through terraform state file using the syntax below:
-
-```tf
-"${data.terraform_remote_state.<module_name>.<output_variable_name>}"
+data.terraform_remote_state.<module_name>.<output_variable_name>
 ```
 
 
 ## Authors
-Module maintained by Module maintained by the - **_Nitin Das_**
+_Module maintained by Module maintained by the -_ **_Nitin Das_**
