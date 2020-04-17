@@ -9,9 +9,21 @@ variable "port" {
 
 variable "protocol" {
   description = "The protocol for connections from clients to the load balancer."
+  default     = null
 }
 
-variable "target_group_arn" {
-  description = "The ARN of the Target Group to which to route traffic. "
+variable "ssl_policy" {
+  description = "he name of the SSL Policy for the listener."
+  default     = null
 }
 
+variable "certificate_arn" {
+  description = "The ARN of the default SSL server certificate"
+  default     = null
+}
+
+variable "default_action" {
+  description = "An Action block"
+  default     = {}
+  type        = any
+}

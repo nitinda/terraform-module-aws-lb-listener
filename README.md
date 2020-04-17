@@ -76,10 +76,13 @@ _The variables that required in order for the module to be successfully called f
 
 |**_Variable_** | **_Description_** | **_Type_** | **_Argument Status_** | **_Default Value_** |
 |:----|:----|-----:|:---:|:---:|
-| **_load\_balancer\_arn_** | _Load Balancer arn_ | _string_ | **_Required_** |
-| **_port_** | _Listener port_ | _number_ | **_Required_** |
-| **_protocol_** | _Listener protocol_ | _string_ | **_Required_** |
-| **_target\_group\_arn_** | _Target Group arn_ | _string_ | **_Required_** |
+| **_load\_balancer\_arn_** | _Load Balancer arn_ | _string_ | **_Required_** |  |
+| **_port_** | _Listener port_ | _number_ | **_Required_** |  |
+| **_protocol_** | _The protocol for connections from clients to the load balancer_ | _string_ | **_Optional_** | **_null_** |
+| **_ssl\_policy_** | _The name of the SSL Policy for the listener.Required if protocol is **HTTPS** or **TLS**_ | _string_ | **_Optional_** | **_null_** |
+| **_certificate\_arn_** | _The ARN of the default SSL server certificate.Exactly one certificate is required if the protocol is HTTPS_ | _string_ | **_Optional_** | **_null_** |
+| **_default\_action_** | _An Action block_ | _any_ | **_Optional_** | **_{}_** |
+
 
 
 
