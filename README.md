@@ -63,10 +63,12 @@ module "lb_listener" {
   port              = 80
   protocol          = "HTTP"
 
-  default_action = {
-    type             = "forward"
-    target_group_arn = "${module.alb_target_group.arn}"
-  }
+  default_action = [
+    {
+      type             = "forward"
+      target_group_arn = module.alb_target_group.arn
+    }
+  ]
 }
 ```
 
@@ -86,15 +88,17 @@ module "lb_listener" {
   port              = 80
   protocol          = "HTTP"
 
-  default_action {
-    type = "redirect"
-
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
+  default_action = [
+    {
+      type = "redirect"
+      
+      redirect = {
+        port        = "443"
+        protocol    = "HTTPS"
+        status_code = "HTTP_301"
+      }
     }
-  }
+  ]
 }
 ```
 
@@ -114,15 +118,17 @@ module "lb_listener" {
   port              = 80
   protocol          = "HTTP"
 
-  default_action {
-    type = "fixed-response"
+  default_action = [
+    {
+      type = "fixed-response"
 
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "Fixed response content"
-      status_code  = "200"
+      fixed_response = {
+        content_type = "text/plain"
+        message_body = "Fixed response content"
+        status_code  = "200"
+      }
     }
-  }
+  ]
 }
 ```
 
@@ -142,15 +148,21 @@ module "lb_listener" {
   port              = 80
   protocol          = "HTTP"
 
-  default_action {
-    type = "fixed-response"
+  default_action = [
+    {
+      type = "authenticate-cognito"
 
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "Fixed response content"
-      status_code  = "200"
+      authenticate_cognito = {
+        user_pool_arn       = "${aws_cognito_user_pool.pool.arn}"
+        user_pool_client_id = "${aws_cognito_user_pool_client.client.id}"
+        user_pool_domain    = "${aws_cognito_user_pool_domain.domain.domain}"
+      }
+    },
+    {
+      type             = "forward"
+      target_group_arn = module.alb_target_group.arn
     }
-  }
+  ]
 }
 ```
 
@@ -170,15 +182,24 @@ module "lb_listener" {
   port              = 80
   protocol          = "HTTP"
 
-  default_action {
-    type = "fixed-response"
+  default_action = [
+    {
+      type = "authenticate-oidc"
 
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "Fixed response content"
-      status_code  = "200"
+      authenticate_oidc {
+        authorization_endpoint = "https://example.com/authorization_endpoint"
+        client_id              = "client_id"
+        client_secret          = "client_secret"
+        issuer                 = "https://example.com"
+        token_endpoint         = "https://example.com/token_endpoint"
+        user_info_endpoint     = "https://example.com/user_info_endpoint"
+      }
+    },
+    {
+      type             = "forward"
+      target_group_arn = module.alb_target_group.arn
     }
-  }
+  ]
 }
 ```
 
