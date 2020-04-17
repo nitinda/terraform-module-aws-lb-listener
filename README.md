@@ -65,22 +65,122 @@ module "lb_listener" {
 
   default_action = {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.front_end.arn}"
+    target_group_arn = "${module.alb_target_group.arn}"
   }
 }
 ```
 
 - **_Redirect Action_**
 
+```tf
+module "lb_listener" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+  
+  # Providers
+  providers = {
+    aws = aws.services
+  }
+
+  # ALB Listener
+  load_balancer_arn = module.alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+```
 
 - **_Fixed-response Action_**
 
+```tf
+module "lb_listener" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+  
+  # Providers
+  providers = {
+    aws = aws.services
+  }
+
+  # ALB Listener
+  load_balancer_arn = module.alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Fixed response content"
+      status_code  = "200"
+    }
+  }
+}
+```
 
 - **_Authenticate-cognito Action_**
 
+```tf
+module "lb_listener" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+  
+  # Providers
+  providers = {
+    aws = aws.services
+  }
+
+  # ALB Listener
+  load_balancer_arn = module.alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Fixed response content"
+      status_code  = "200"
+    }
+  }
+}
+```
 
 - **_Authenticate-oidc Action_**
 
+```tf
+module "lb_listener" {
+  source = "git::https://github.com/nitinda/terraform-module-aws-lb-listener.git?ref=master"
+  
+  # Providers
+  providers = {
+    aws = aws.services
+  }
+
+  # ALB Listener
+  load_balancer_arn = module.alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Fixed response content"
+      status_code  = "200"
+    }
+  }
+}
+```
 
 ---
 
