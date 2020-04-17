@@ -1,4 +1,5 @@
 # Terraform Module: terraform-module-aws-lb-listener
+_Terraform module for_ **_Load Balancer Listner_**_
 
 
 ## General
@@ -7,7 +8,7 @@ _This module may be used to create_ **_Load Balancer Listener_** _resources in A
 
 ---
 
-## Prerequisites
+## _Prerequisites_
 
 _This module needs_ **_Terraform 0.12.16_** _or newer._
 _You can download the latest Terraform version from_ [_here_](https://www.terraform.io/downloads.html).
@@ -18,7 +19,7 @@ _This module deploys aws services details are in respective feature branches._
 ---
 
 
-## Features
+## _Features_
 
 _Below we are able to check the resources that are being created as part of this module call:_
 
@@ -31,9 +32,9 @@ _Below we are able to check the resources that are being created as part of this
 
 
 
-## Usage
+## _Usage_
 
-## Using this repo
+## _Using this repo_
 
 _To use this module, add the following call to your code:_
 
@@ -59,13 +60,13 @@ module "lb_listener" {
 
 
 
-## Inputs
+## _Inputs_
 
 
 _The variables that required in order for the module to be successfully called from the layers are the following:_
 
-|**_Variable_** | **_Description_** | **_Type_** | **_Comments_** |
-|:----|:----|-----:|-----:|
+|**_Variable_** | **_Description_** | **_Type_** | **_Argument Status_** | **_Default Value_** |
+|:----|:----|-----:|:---:|:---:|
 | **_load\_balancer\_arn_** | _Load Balancer arn_ | _string_ | **_Required_** |
 | **_port_** | _Listener port_ | _number_ | **_Required_** |
 | **_protocol_** | _Listener protocol_ | _string_ | **_Required_** |
@@ -73,29 +74,38 @@ _The variables that required in order for the module to be successfully called f
 
 
 
-## Outputs
+## _Outputs_
 
-### General
-_Below are the variables that Networking Module exposes in order to be used by other layers_
+### _General_
+
+_This module has the following outputs:_
 
 
 * **_arn_**
 * **_id_**
 
 
+---
 
-### Usage
-_In order for the variables to be accessed on module level please use the syntax below:_
+### _Usage_
+
+_In order for the variables to be accessed at module level please use the syntax below:_
 
 ```tf
 module.<module_name>.<output_variable_name>
 ```
+
+
 _The output variable is able to be accessed through terraform state file using the syntax below:_
 
 ```tf
-data.terraform_remote_state.<module_name>.<output_variable_name>
+data.terraform_remote_state.<layer_name>.<output_variable_name>
 ```
 
+---
 
-## Authors
+
+
+## _Authors_
+
 _Module maintained by Module maintained by the -_ **_Nitin Das_**
