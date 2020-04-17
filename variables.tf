@@ -24,6 +24,6 @@ variable "certificate_arn" {
 
 variable "default_action" {
   description = "An Action block"
-  default     = []
+  default     = {}
   type        = any
 }
