@@ -1,5 +1,5 @@
 # _Terraform Module: terraform-module-aws-lb-listener_
-_Terraform module for_ **_Load Balancer Listner_**_
+_Terraform module for_ **_Load Balancer Listner_**
 
 <!--BEGIN STABILITY BANNER-->
 ---
