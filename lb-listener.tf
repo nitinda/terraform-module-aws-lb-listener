@@ -6,7 +6,7 @@ resource "aws_lb_listener" "lb_listener" {
   certificate_arn   = var.certificate_arn
 
   dynamic "default_action" {
-    for_each = var.default_action == {} ? [] : [var.default_action]
+    for_each = var.default_action
     content {
       order            = lookup(default_action.value, "order", null)
       target_group_arn = lookup(default_action.value, "target_group_arn", null)
